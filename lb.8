@@ -1,0 +1,50 @@
+#include <iostream>
+
+using namespace std;
+
+bool isCharInString(const char* str, char c) {
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] == c) {
+            return true;
+        }
+    }
+    return false;
+}
+
+char* mergeStrings(const char* str1, const char* str2) {
+    int len1 = 0, len2 = 0;
+    while (str1[len1] != '\0') len1++;
+    while (str2[len2] != '\0') len2++;
+
+    char* result = new char[len1 + len2 + 1];
+    int index = 0;
+
+    for (int i = 0; str1[i] != '\0'; i++) {
+        if (!isCharInString(result, str1[i])) {            
+result[index++] = str1[i];
+        }
+    }
+
+    for (int i = 0; str2[i] != '\0'; i++) {
+        if (!isCharInString(result, str2[i])) {
+            result[index++] = str2[i];
+        }
+    }
+
+    result[index] = '\0';
+
+    return result;
+}
+
+int main() {
+    const char* str1 = "hello";
+    const char* str2 = "world";
+
+    char* merged = mergeStrings(str1, str2);
+
+    cout << "Об'єднаний рядок без повторів: " << merged << endl;
+
+    delete[] merged;
+
+    return 0;
+}
